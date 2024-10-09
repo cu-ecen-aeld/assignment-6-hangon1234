@@ -24,7 +24,7 @@ FILES:${PN} += "${bindir}/aesdsocket"
 TARGET_LDFLAGS += "-pthread -lrt"
 
 # Use initscript
-INITSCRIPT_PACKAGES = ${PN}
+INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME:${PN} = "aesdsocket-start-stop"
 
 do_configure () {
