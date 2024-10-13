@@ -8,7 +8,7 @@ SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-hangon1234.
 
 PV = "1.0+git${SRCPV}"
 # TODO: set to reference a specific commit hash in your assignment repo
-SRCREV = "81c6c40c8d7d33ba4dd4e6be342da9eb5b8874d8"
+SRCREV = "ed87c145a30e3f348bcb3624de682a4adb154db3"
 
 # This sets your staging directory based on WORKDIR, where WORKDIR is defined at 
 # https://docs.yoctoproject.org/ref-manual/variables.html?highlight=workdir#term-WORKDIR
@@ -25,8 +25,16 @@ TARGET_LDFLAGS += "-pthread -lrt"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 # Use initscript
+
+inherit update-rc.d
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME:${PN} = "aesdsocket-start-stop.sh"
+
+# Fix abort of aesdsocket
+# libgcc_s.so.1 must be installed for pthread_exit to work
+# solution found at https://docs.yoctoproject.org/pipermail/yocto/2018-March/040228.html
+
+RDEPENDS:${PN} = "libgcc"
 
 do_configure () {
 }
