@@ -22,6 +22,7 @@ FILES:${PN} += "${bindir}/aesdsocket"
 # TODO: customize these as necessary for any libraries you need for your application
 # (and remove comment)
 TARGET_LDFLAGS += "-pthread -lrt"
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 # Use initscript
 INITSCRIPT_PACKAGES = "${PN}"
